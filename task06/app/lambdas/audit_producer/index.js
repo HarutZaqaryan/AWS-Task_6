@@ -6,7 +6,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const auditTable = process.env.target_table || 'Audit';
 
 export const handler = async (event) => {
-  console.log('~~~EVENT~~~', EventSource);
+  console.log('~~~EVENT~~~', event);
 
   for (const record of event.Records) {
     console.log('~~~EVENT Record', record);
