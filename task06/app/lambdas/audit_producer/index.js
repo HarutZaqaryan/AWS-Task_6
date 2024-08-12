@@ -2,22 +2,17 @@ import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-
 const auditTable = process.env.target_table || 'Audit';
 
 export const handler = async (event) => {
-  console.log('~~~EVENT~~~', event);
 
   for (const record of event.Records) {
-    console.log('~~~EVENT Record', record);
 
     const id = uuidv4();
     const modificationTime = new Date().toISOString();
 
     const newItem = record.dynamodb.NewImage ? AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage) : null;
-    console.log('~~~newItem~~~',newItem);
     const oldItem = record.dynamodb.OldImage ? AWS.DynamoDB.Converter.unmarshall(record.dynamodb.OldImage) : null;
-    console.log('~~~oldItem~~~',oldItem);
 
 
     let auditEntry = {
@@ -26,9 +21,6 @@ export const handler = async (event) => {
       modificationTime,
       newValue:newItem
     };
-
-    console.log('~~~auditEntry~~~',auditEntry);
-
 
     if (record.eventName === 'INSERT') {
       auditEntry.newValue = newItem;
