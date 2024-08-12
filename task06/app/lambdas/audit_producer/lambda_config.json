@@ -12,8 +12,9 @@
   "event_sources": [
     {
       "resource_type":"dynamodb_trigger",
+      "resource_name":"Configuration",
       "event_source_arn":"arn:aws:dynamodb:eu-central-1:196241772369:table/cmtr-954a4fcc-Configuration/stream/2024-08-12T08:19:03.267",
-      "target_table": "cmtr-954a4fcc-Configuration",
+      "target_table": "Configuration",
       "batch_size": 100,
       "starting_position": "LATEST"
     }
