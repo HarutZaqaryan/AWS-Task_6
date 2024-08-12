@@ -24,6 +24,7 @@ export const handler = async (event) => {
       id,
       itemKey: newItem ? newItem.key : oldItem.key,
       modificationTime,
+      newValue:newItem
     };
 
     console.log('~~~auditEntry~~~',auditEntry);
